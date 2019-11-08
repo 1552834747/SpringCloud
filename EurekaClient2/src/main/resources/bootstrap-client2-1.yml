@@ -1,0 +1,26 @@
+server:
+  port: 20004                                   #  定义服务启动端口
+
+spring:
+  application:
+    name: client2                                       #    服务名
+  cloud:
+    config:                                         #    从配置中心获取配置
+#      uri: http://localhost:7001/                   #      配置中心地址
+      profile: dev                                  #      配置环境
+      label: master                                 #      分支
+      name: client2-1,public                 #      文件名       #      获取的配置文件名为  {name}-{profile}
+      discovery:
+        enabled: true                      #开启配置服务发现    服务化配置中心
+        serviceId: config-server           #配置中心服务名
+      fail-fast: true                 #快速失败   获取不到远程配置是立即失败，但以下面配置进行重试
+      retry:
+        initial-interval: 1100        #首次重试间隔时间，默认1000毫秒
+        multiplier: 1.1D              #下一次重试间隔时间的乘数，比如开始1000，下一次就是1000*1.1=1100
+        max-interval: 2000            #最大重试时间，默认2000
+        max-attempts: 3               #最大重试次数，默认6次
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:20001/eureka/,http://eureka2:20002/eureka/        #      注册到指定的eureka服务

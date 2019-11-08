@@ -1,0 +1,22 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh                      #暴露刷新的地址。
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+  cloud:
+    config:
+      failFast: true
+    bus:
+      enabled: true                               #      是否启用springcloud config bus。
+      trace:
+        enabled: true                             #      开启跟踪总线事件。
+
+data:
+  value: client2-1

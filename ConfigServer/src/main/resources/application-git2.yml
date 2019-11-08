@@ -1,0 +1,30 @@
+server:
+  port: 7002
+spring:
+  application:
+    name: config-server                     # 服务名
+  rabbitmq:                                #配置rabbitmq   bus消息总线刷新配置用
+    host: localhost                         #ip地址
+    port: 5672                              #端口
+    username: admin                         #账号
+    password: admin                         #密码
+  cloud:
+    bus:
+      enabled: true                         #      是否启用springcloud config bus。
+      trace:
+        enabled: true                       #        开启跟踪总线事件。
+    config:
+      server:
+        git:
+          uri: https://github.com/1552834747/MySpringCloud.git            #  配置文件只搜索url目录下的searchPaths
+          searchPaths: ConfigServer/src/main/resources/config             # 指定搜索路径，如果有多个路径则使用,分隔
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:20001/eureka/,http://eureka2:20002/eureka/        #      注册到指定的eureka服务
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh                    # 监控模块：暴露刷新的地址。

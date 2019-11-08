@@ -1,0 +1,19 @@
+spring:
+  application:
+    #    服务名
+    name: eureka-server
+server:
+  port: 20001
+
+eureka:
+  instance:
+    #域名
+    hostname: eureka1
+  client:
+    # 表示是否注册自身到eureka服务器
+    register-with-eureka: false
+    # 是否从eureka上获取注册信息
+    fetch-registry: false
+    serviceUrl:
+#      集群 eureka服务之间相互注册
+      defaultZone: http://eureka2:20002/eureka/

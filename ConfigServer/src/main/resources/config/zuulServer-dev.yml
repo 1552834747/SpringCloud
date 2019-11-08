@@ -1,0 +1,9 @@
+zuul:
+  routes:                                   #    定义转发服务规则
+    client1:                                # 服务名
+      path: /client1/**                     #      转发路径
+      strip-prefix: false                   #     前缀是否需要带上服务名  true:/eureka-client1/client1/**  false:/client1/**
+    client2:
+      path: /client2/**
+      strip-prefix: false
+
